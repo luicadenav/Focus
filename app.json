@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "learning",
-    "slug": "learning",
+    "name": "Snapping",
+    "slug": "Snapping",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "Snapping",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
