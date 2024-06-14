@@ -7,6 +7,14 @@ this app showcases impressive design and functionality, enabling seamless sharin
      Build this project step by step with  A detailed tutorial on  <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery-Aora</b></a>
     </div>
 
+## Tech Stack
+
+- React Native
+- Expo
+- Nativewind
+- Animatable
+- Appwrite
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
