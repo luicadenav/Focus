@@ -1,11 +1,12 @@
-import { View, Image, Text } from "react-native";
-import React from "react";
-import { Tabs, Redirect } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { Redirect, Tabs } from "expo-router";
+import { Image, Text, View } from "react-native";
+
 import { icons } from "../../constants";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="items-center justify-center gap-2">
+    <View className="flex items-center justify-center gap-2">
       <Image
         source={icon}
         resizeMode="contain"
@@ -22,14 +23,14 @@ const TabIcon = ({ icon, color, name, focused }) => {
   );
 };
 
-const TabsLayout = () => {
+const TabLayout = () => {
   return (
     <>
       <Tabs
         screenOptions={{
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: "#ffa001",
+          tabBarActiveTintColor: "#FFA001",
           tabBarInactiveTintColor: "#CDCDE0",
+          tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: "#161622",
             borderTopWidth: 1,
@@ -68,6 +69,7 @@ const TabsLayout = () => {
             ),
           }}
         />
+
         <Tabs.Screen
           name="create"
           options={{
@@ -103,4 +105,4 @@ const TabsLayout = () => {
   );
 };
 
-export default TabsLayout;
+export default TabLayout;
