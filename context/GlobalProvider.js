@@ -11,6 +11,12 @@ const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("islogged in provider", isLogged);
+    console.log("loading in provider", loading);
+    console.log("user in provider", user);
+  }, [isLogged, loading]);
+
+  useEffect(() => {
     getCurrentUser()
       .then((res) => {
         if (res) {
