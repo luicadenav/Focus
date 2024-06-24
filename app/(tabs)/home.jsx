@@ -1,19 +1,36 @@
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, Alert } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "./../../constants";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
     //recall videos
   };
+
+  useEffect(() => {
+    const fetchData = async ()=>{
+      setIsLoading(true);
+      try {
+        const response = await get
+      } catch (error) {
+        Alert.alert('Error', error.message)
+      }finally{
+        setIsLoading(false)
+      }
+
+    };
+  }, []);
+
   return (
     <SafeAreaView className="bg-primary">
       <FlatList
