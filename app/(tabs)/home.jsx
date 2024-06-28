@@ -1,42 +1,55 @@
-import { View, Text, FlatList, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  Alert,
+  RefreshControl,
+} from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "./../../constants";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
+import VideoCard from "../../components/VideoCard";
 import EmptyState from "../../components/EmptyState";
 import { useState, useEffect } from "react";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
+import useAppwrite from "../../lib/useAppwrite";
 
 const Home = () => {
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+  console.log("🚀 ~ Home ~ posts:", posts);
+  const { data: latestPosts } = useAppwrite(getLatestPosts);
+
   const [refreshing, setRefreshing] = useState(false);
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    //recall videos
+    await refetch();
+    setRefreshing(false);
   };
 
-  useEffect(() => {
-    const fetchData = async ()=>{
-      setIsLoading(true);
-      try {
-        const response = await get
-      } catch (error) {
-        Alert.alert('Error', error.message)
-      }finally{
-        setIsLoading(false)
-      }
+  // one flatlist
+  // with list header
+  // and horizontal flatlist
 
-    };
-  }, []);
+  //  we cannot do that with just scrollview as there's both horizontal and vertical scroll (two flat lists, within trending)
 
   return (
     <SafeAreaView className="bg-primary">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }]}
+        data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => <Text>{item.id}</Text>}
+        renderItem={({ item }) => (
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
+        )}
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4 space-y-6">
             <View className="flex justify-between items-start flex-row mb-6">
@@ -65,7 +78,7 @@ const Home = () => {
                 Latest Videos
               </Text>
 
-              <Trending posts={[{ id: 1 }, { id: 2 }] ?? []} />
+              <Trending posts={latestPosts ?? []} />
             </View>
           </View>
         )}
@@ -75,6 +88,9 @@ const Home = () => {
             subtitle="No videos created yet"
           />
         )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );
